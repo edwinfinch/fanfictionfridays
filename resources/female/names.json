@@ -1,0 +1,52 @@
+{
+	"people":[
+		{
+			"name":"Peach",
+			"file":"peach.jpg"
+		},
+		{
+			"name":"Amy Rose",
+			"file":"amy_rose.png"
+		},
+		{
+			"name":"Rosalina",
+			"file":"rosalina.png"
+		},
+		{
+			"name":"Ann Frank",
+			"file":"frank.jpg"
+		},
+		{
+			"name":"Pearl",
+			"file":"pearl.jpg"
+		},
+		{
+			"name":"Connor's Mom",
+			"file":"connors_mom.png"
+		},
+		{
+			"name":"Samus",
+			"file":"samus.jpg"
+		},
+		{
+			"name":"Candy Kong",
+			"file":"candy_kong.jpg"
+		},
+		{
+			"name":"The Mud",
+			"file":"mud.jpg"
+		},
+		{
+			"name":"Cream the Rabit",
+			"file":"vanilla.jpg"
+		},
+		{
+			"name":"Danika + Dogs",
+			"file":"dankia.jpg"
+		},
+		{
+			"name":"Olivia (extra hot)",
+			"file":"olivia.jpg"
+		}
+	]
+}

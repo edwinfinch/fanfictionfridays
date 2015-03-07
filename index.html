@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html>
+
+<head>
+   <title>Fan Fiction Fridays</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <link rel="stylesheet" href="https://edwinfinch.com/resources/pure-min.css">
+   <style>
+   img {
+       max-width: 50%;
+       max-height: 50%;
+       border:3px solid;
+   }
+   </style>
+   <script type="text/javascript">
+	var req;
+	var reqm;
+	var reqf;
+	var reqb;
+	var male = -1;	
+	var female = -1;
+
+ 
+function reloadData()
+{
+   var urlr = "https://fedoratricks.com/fff/current_combo.json";
+
+   try {
+      req = new XMLHttpRequest();
+   } catch (e) {
+      try {
+         req = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (e) {
+         try {
+            req = new ActiveXObject("Microsoft.XMLHTTP");
+         } catch (oc) {
+            alert("No AJAX Support");
+            return;
+         }
+      }
+   }
+
+   req.onreadystatechange = processReqChange;
+   req.open("GET", urlr, true);
+   req.send("");
+}
+
+function processReqChange()
+{
+   // If req shows "complete"
+   if (req.readyState == 4)
+   {
+      dataDiv = document.getElementById('currentData');
+
+      // If "OK"
+      if (req.status == 200)
+      {
+         // Set current data text
+         var jsonobj = JSON.parse(req.responseText);
+	var reload = true;
+	if(male === jsonobj.male){
+		reload = false;
+	}
+	var reloadm = true;
+	if(female === jsonobj.female){
+		reloadm = false;
+	}
+         male = jsonobj.male;
+	 female = jsonobj.female;
+	 console.log("male " + male + " female " + female);
+         // Start new timer (1 min)
+	if(reload === true){	
+         reloadMaleData();
+	}
+	if(reloadm === true){
+	 reloadFemaleData();
+	}
+	setTimeout('reloadData()', 500);
+      }
+      else
+      {
+         // Flag error
+         dataDiv.innerHTML = '<p>There was a problem: ' + req.statusText + '</p>';
+      }
+   }
+}
+function reloadFemaleData()
+{
+   var urlf = "https://fedoratricks.com/fff/resources/female/names.json";
+
+   try {
+      reqf = new XMLHttpRequest();
+   } catch (e) {
+      try {
+         reqf = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (e) {
+         try {
+            reqf = new ActiveXObject("Microsoft.XMLHTTP");
+         } catch (oc) {
+            alert("No AJAX Support");
+            return;
+         }
+      }
+   }
+
+   reqf.onreadystatechange = processReqFChange;
+   reqf.open("GET", urlf, true);
+   reqf.send("");
+}
+
+function processReqFChange()
+{
+   // If req shows "complete"
+   if (reqf.readyState == 4)
+   {
+      dataDiv = document.getElementById('currentData1');
+
+      // If "OK"
+      if (reqf.status == 200)
+      {
+         // Set current data text
+         var jsonobj = JSON.parse(reqf.responseText);
+
+         var name = jsonobj.people[female].name;
+         var file = jsonobj.people[female].file;
+
+         dataDiv.innerHTML = "<h2>FEMALE</h2><img src='https://fedoratricks.com/fff/resources/female/" + file + "' /><br><br>" + name;
+      }
+      else
+      {
+         // Flag error
+         dataDiv.innerHTML = '<p>There was a problem: ' + reqf.statusText + '</p>';
+      }
+   }
+}
+
+
+
+function reloadMaleData()
+{
+   var urlm = "https://fedoratricks.com/fff/resources/male/names.json";
+
+   try {
+      reqm = new XMLHttpRequest();
+   } catch (e) {
+      try {
+         reqm = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (e) {
+         try {
+            reqm = new ActiveXObject("Microsoft.XMLHTTP");
+         } catch (oc) {
+            alert("No AJAX Support");
+            return;
+         }
+      }
+   }
+
+   reqm.onreadystatechange = processReqMChange;
+   reqm.open("GET", urlm, true);
+   reqm.send("");
+}
+
+function processReqMChange()
+{
+   // If req shows "complete"
+   if (reqm.readyState == 4)
+   {
+      dataDiv = document.getElementById('currentData');
+
+      // If "OK"
+      if (reqm.status == 200)
+      {
+         dataDiv.innerHTML = "got json 2";
+         // Set current data text
+         var jsonobj = JSON.parse(reqm.responseText);
+
+	 var name = jsonobj.people[male].name;
+         var file = jsonobj.people[male].file;
+
+         dataDiv.innerHTML = "<h2>MALE</h2><img src='https://fedoratricks.com/fff/resources/male/" + file + "'/><br><br>" + name;
+         // Start new timer (1 min)
+        
+      }
+      else
+      {
+         // Flag error
+         dataDiv.innerHTML = '<p>There was a problem: ' + reqm.statusText + '</p>';
+      }
+   }
+}
+
+function reloadButtonData()
+{
+   var urlm = "https://fedoratricks.com/fff/generate.php";
+
+	var div = document.getElementById("buttonDiv");
+div.innerHTML = "<button class='pure-button pure-button-primary' disabled>Generating... Please wait.</button>";
+
+   try {
+      reqb = new XMLHttpRequest();
+   } catch (e) {
+      try {
+         reqb = new ActiveXObject("Msxml2.XMLHTTP");
+      } catch (e) {
+         try {
+            reqb = new ActiveXObject("Microsoft.XMLHTTP");
+         } catch (oc) {
+            alert("No AJAX Support");
+            return;
+         }
+      }
+   }
+
+   reqb.onreadystatechange = processReqBChange;
+   reqb.open("POST", urlm, true);
+   reqb.send("");
+}
+
+function processReqBChange()
+{
+   // If req shows "complete"
+   if (reqb.readyState == 4)
+   {
+	if(reqb.status == 200){
+      var dataDiv1 = document.getElementById("buttonDiv");
+
+         dataDiv1.innerHTML = "<button class='pure-button pure-button-primary' onClick='reloadButtonData()'>Click to Generate</button>";
+         // Start new timer (1 min)
+        }
+  
+   }
+}
+
+
+   </script>
+</head>
+
+<body onload="reloadData()" align="center">
+<br>
+<h1>Fan Friction Friday Generator</h1>
+<h3>Live updating is dependent on the server response time. Refreshing the page won't help.</h3>
+<div id="buttonDiv">
+     <button onClick="reloadButtonData()" class='pure-button pure-button-primary'>Click to Generate</button>
+   </div>
+   <div id="currentData" align="center" style="float: left; width: 50%">
+    <h2>MALE</h2>
+      <p>Loading male...</p>
+   </div>
+   <div id="currentData1" align="center" style="float: right; width: 50%">
+	<p>Loading female...</p>
+   </div>
+<br>
+</body>
+
+</html>

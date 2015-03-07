@@ -1,0 +1,60 @@
+{
+	"people":[
+		{
+			"name":"Donkey Kong",
+			"file":"donkey_kong.jpg"
+		},
+		{
+			"name":"Diddy Kong",
+			"file":"diddy_kong.png"
+		},
+		{
+			"name":"Sanic",
+			"file":"sanic.png"
+		},
+		{
+			"name":"Tails",
+			"file":"tails.png"
+		},
+		{
+			"name":"Spongebob",
+			"file":"spongebob.jpg"
+		},
+		{
+			"name":"Patrick",
+			"file":"patrick.png"
+		},
+		{
+			"name":"Mr. Krabs",
+			"file":"krabs.jpg"
+		},
+		{
+			"name":"Plankton",
+			"file":"plankton.png"
+		},
+		{
+			"name":"Shrek",
+			"file":"shrek.jpg"
+		},
+		{
+			"name":"Connor",
+			"file":"connor.png"
+		},
+		{
+			"name":"Shadow the Hedgehog",
+			"file":"shadow.png"
+		},
+		{
+			"name":"Thomas the Dank Engine",
+			"file":"thomas.jpg"
+		},
+		{
+			"name":"Danny Devito",
+			"file":"danny.jpg"
+		},
+		{
+			"name":"Swagrid",
+			"file":"hagrid.jpg"
+		}
+	]
+}
